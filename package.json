@@ -1,7 +1,7 @@
 {
 	"dependencies": {
 		"@wordpress/api-fetch": "^6.47.0",
-		"@wordpress/components": "^26.0.0",
+		"@wordpress/components": "^30.9.0",
 		"@wordpress/data": "^9.21.0",
 		"@wordpress/dom-ready": "^3.50.0",
 		"@wordpress/element": "^5.27.0",
