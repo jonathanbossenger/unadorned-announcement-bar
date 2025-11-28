@@ -6,7 +6,7 @@
 		"@wordpress/dom-ready": "^3.50.0",
 		"@wordpress/element": "^6.36.0",
 		"@wordpress/i18n": "^4.50.0",
-		"@wordpress/icons": "^9.42.0",
+		"@wordpress/icons": "^11.3.0",
 		"@wordpress/notices": "^5.36.0"
 	},
 	"devDependencies": {
