@@ -35,9 +35,19 @@ const SettingsPage = () => {
 		saveSettings,
 	} = useSettings();
 
-	const data = {};
-	const fields = [];
-	const form = {};
+	const data = {
+		message: '',
+	};
+	const fields = [
+		{
+			id: 'message',
+			label: __( 'Message', 'unadorned-announcement-bar' ),
+			type: 'text',
+		},
+	];
+	const form = {
+		fields: [ 'message' ],
+	};
 
 	return (
 		<>
