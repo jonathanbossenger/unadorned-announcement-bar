@@ -3,13 +3,10 @@ import {
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalHeading as Heading,
 	Button,
-	Panel,
-	PanelBody,
-	PanelRow,
 } from '@wordpress/components';
+import { DataForm } from '@wordpress/dataviews/wp';
 import { useSettings } from '../hooks';
 import { Notices } from './notices';
-import { MessageControl, DisplayControl, SizeControl } from './controls';
 
 const SettingsTitle = () => {
 	return (
@@ -38,37 +35,20 @@ const SettingsPage = () => {
 		saveSettings,
 	} = useSettings();
 
+	const data = {};
+	const fields = [];
+	const form = {};
+
 	return (
 		<>
 			<SettingsTitle />
 			<Notices />
-			<Panel>
-				<PanelBody>
-					<PanelRow>
-						<MessageControl
-							value={ message }
-							onChange={ ( value ) => setMessage( value ) }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<DisplayControl
-							value={ display }
-							onChange={ ( value ) => setDisplay( value ) }
-						/>
-					</PanelRow>
-				</PanelBody>
-				<PanelBody
-					title={ __( 'Appearance', 'unadorned-announcement-bar' ) }
-					initialOpen={ false }
-				>
-					<PanelRow>
-						<SizeControl
-							value={ size }
-							onChange={ ( value ) => setSize( value ) }
-						/>
-					</PanelRow>
-				</PanelBody>
-			</Panel>
+			<DataForm
+				data={ data }
+				fields={ fields }
+				form={ form }
+				onChange={ () => {} }
+			/>
 			<SaveButton onClick={ saveSettings } />
 		</>
 	);
