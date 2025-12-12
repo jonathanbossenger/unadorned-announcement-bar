@@ -5,9 +5,11 @@ import { useEffect, useState } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
 
 const useSettings = () => {
-	const [ message, setMessage ] = useState();
-	const [ display, setDisplay ] = useState();
-	const [ size, setSize ] = useState();
+	const [ settings, setSettings ] = useState( {
+		message: '',
+		display: false,
+		size: 'small',
+	} );
 
 	const { createSuccessNotice } = useDispatch( noticesStore );
 
@@ -38,12 +40,8 @@ const useSettings = () => {
 	};
 
 	return {
-		message,
-		setMessage,
-		display,
-		setDisplay,
-		size,
-		setSize,
+		settings,
+		setSettings,
 		saveSettings,
 	};
 };
