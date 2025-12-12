@@ -90,7 +90,12 @@ const SettingsPage = () => {
 				data={ settings }
 				fields={ fields }
 				form={ form }
-				onChange={ () => {} }
+				onChange={ ( edits ) =>
+					setSettings( ( previous ) => ( {
+						...previous,
+						...edits,
+					} ) )
+				}
 			/>
 			<SaveButton onClick={ saveSettings } />
 		</>
