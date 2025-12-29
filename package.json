@@ -7,7 +7,7 @@
 		"@wordpress/element": "6.33.1",
 		"@wordpress/i18n": "6.10.0",
 		"@wordpress/icons": "11.0.1",
-		"@wordpress/notices": "5.33.1"
+		"@wordpress/notices": "5.37.0"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "31.2.0"
