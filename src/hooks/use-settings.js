@@ -11,6 +11,8 @@ const useSettings = () => {
         size: 'small',
     } );
 
+    const { createSuccessNotice } = useDispatch( noticesStore );
+
 
     useEffect( () => {
         apiFetch( { path: '/wp/v2/settings' } ).then( ( wpSettings ) => {
