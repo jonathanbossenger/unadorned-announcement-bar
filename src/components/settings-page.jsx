@@ -7,6 +7,7 @@ import {
 	PanelBody,
 	PanelRow,
 } from '@wordpress/components';
+import { DataForm } from '@wordpress/dataviews/wp';
 import { useSettings } from '../hooks';
 import { Notices } from './notices';
 import { MessageControl, DisplayControl, SizeControl } from './controls';
@@ -28,50 +29,89 @@ const SaveButton = ( { onClick } ) => {
 };
 
 const SettingsPage = () => {
-	const {
-		message,
-		setMessage,
-		display,
-		setDisplay,
-		size,
-		setSize,
-		saveSettings,
-	} = useSettings();
+    const [ settings, setSettings, saveSettings ] = useSettings();
 
-	return (
-		<>
-			<SettingsTitle />
-			<Notices />
-			<Panel>
-				<PanelBody>
-					<PanelRow>
-						<MessageControl
-							value={ message }
-							onChange={ ( value ) => setMessage( value ) }
-						/>
-					</PanelRow>
-					<PanelRow>
-						<DisplayControl
-							value={ display }
-							onChange={ ( value ) => setDisplay( value ) }
-						/>
-					</PanelRow>
-				</PanelBody>
-				<PanelBody
-					title={ __( 'Appearance', 'unadorned-announcement-bar' ) }
-					initialOpen={ false }
-				>
-					<PanelRow>
-						<SizeControl
-							value={ size }
-							onChange={ ( value ) => setSize( value ) }
-						/>
-					</PanelRow>
-				</PanelBody>
-			</Panel>
-			<SaveButton onClick={ saveSettings } />
-		</>
-	);
+    const data = {
+        message: '',
+        display: false,
+        size: 'small',
+    };
+
+    const fields = [
+        {
+            id: 'message',
+            label: __( 'Message', 'unadorned-announcement-bar' ),
+            type: 'text',
+            Edit: 'textarea',
+        },
+        {
+            id: 'display',
+            label: __( 'Display', 'unadorned-announcement-bar' ),
+            type: 'boolean',
+            Edit: 'toggle',
+        },
+        {
+            id: 'size',
+            label: __( 'Font size', 'unadorned-announcement-bar' ),
+            type: 'text',
+            elements: [
+                {
+                    value: 'small',
+                    label: __( 'Small', 'unadorned-announcement-bar' ),
+                },
+                {
+                    value: 'medium',
+                    label: __( 'Medium', 'unadorned-announcement-bar' ),
+                },
+                {
+                    value: 'large',
+                    label: __( 'Large', 'unadorned-announcement-bar' ),
+                },
+                {
+                    value: 'x-large',
+                    label: __( 'Extra Large', 'unadorned-announcement-bar' ),
+                },
+            ],
+            Edit: 'toggleGroup',
+        }
+    ];
+
+    const form = {
+        fields: [
+            {
+                id: 'bar',
+                label: __( 'Bar', 'unadorned-announcement-bar' ),
+                children: [ 'message', 'display' ],
+                layout: { type: 'card', withHeader: false },
+            },
+            {
+                id: 'appearance',
+                label: __( 'Appearance', 'unadorned-announcement-bar' ),
+                children: [ 'size' ],
+                layout: { type: 'card', isOpened: false },
+            },
+        ],
+    };
+
+    return (
+        <>
+            <SettingsTitle/>
+            <Notices/>
+            <DataForm
+                data={ data }
+                fields={ fields }
+                form={ form }
+                onChange={ ( edits ) =>
+                    setSettings( ( previous ) => ( {
+                        ...previous,
+                        ...edits,
+                    } ) )
+                }
+
+            />
+            <SaveButton onClick={ saveSettings }/>
+        </>
+    );
 };
 
 export { SettingsPage };

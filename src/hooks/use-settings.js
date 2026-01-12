@@ -5,47 +5,35 @@ import { useEffect, useState } from '@wordpress/element';
 import { useDispatch } from '@wordpress/data';
 
 const useSettings = () => {
-	const [ message, setMessage ] = useState();
-	const [ display, setDisplay ] = useState();
-	const [ size, setSize ] = useState();
+    const [ settings, setSettings ] = useState( {
+        message: '',
+        display: false,
+        size: 'small',
+    } );
 
-	const { createSuccessNotice } = useDispatch( noticesStore );
 
-	useEffect( () => {
-		apiFetch( { path: '/wp/v2/settings' } ).then( ( settings ) => {
-			setMessage( settings.unadorned_announcement_bar.message );
-			setDisplay( settings.unadorned_announcement_bar.display );
-			setSize( settings.unadorned_announcement_bar.size );
-		} );
-	}, [] );
+    useEffect( () => {
+        apiFetch( { path: '/wp/v2/settings' } ).then( ( wpSettings ) => {
+            setSettings( wpSettings.unadorned_announcement_bar )
+        } );
+    }, [] );
+
 
 	const saveSettings = () => {
-		apiFetch( {
-			path: '/wp/v2/settings',
-			method: 'POST',
-			data: {
-				unadorned_announcement_bar: {
-					message,
-					display,
-					size,
-				},
-			},
-		} ).then( () => {
+        apiFetch( {
+            path: '/wp/v2/settings',
+            method: 'POST',
+            data: {
+                unadorned_announcement_bar: settings
+            },
+        } ).then( () => {
 			createSuccessNotice(
 				__( 'Settings saved.', 'unadorned-announcement-bar' )
 			);
 		} );
 	};
 
-	return {
-		message,
-		setMessage,
-		display,
-		setDisplay,
-		size,
-		setSize,
-		saveSettings,
-	};
+    return [ settings, setSettings, saveSettings ];
 };
 
 export default useSettings;
