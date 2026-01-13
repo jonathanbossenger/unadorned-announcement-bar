@@ -12,6 +12,10 @@ updates:
       # Check the npm registry for updates every week
       schedule:
           interval: 'weekly'
+      # Ignore major version updates
+      ignore:
+          - dependency-name: '*'
+            update-types: ['version-update:semver-major']
       # Raise all npm pull requests with assignees
       assignees:
           - 'melbos'
