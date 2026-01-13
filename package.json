@@ -1,16 +1,16 @@
 {
 	"dependencies": {
-		"@wordpress/api-fetch": "7.37.0",
-		"@wordpress/components": "31.0.0",
-		"@wordpress/data": "10.37.0",
-		"@wordpress/dom-ready": "4.37.0",
-		"@wordpress/element": "6.37.0",
-		"@wordpress/i18n": "6.10.0",
-		"@wordpress/icons": "11.4.0",
-		"@wordpress/notices": "5.37.0"
+		"@wordpress/api-fetch": "^7.33.1",
+		"@wordpress/components": "^30.6.4",
+		"@wordpress/data": "^10.33.1",
+		"@wordpress/dom-ready": "^4.33.1",
+		"@wordpress/element": "^6.33.1",
+		"@wordpress/i18n": "^6.6.1",
+		"@wordpress/icons": "^11.0.1",
+		"@wordpress/notices": "^5.33.1"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "31.2.0"
+		"@wordpress/scripts": "^30.26.2"
 	},
 	"scripts": {
 		"build": "wp-scripts build",
